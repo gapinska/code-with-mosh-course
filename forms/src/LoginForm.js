@@ -8,8 +8,6 @@ const LoginForm = () => {
     const value = userName.current.value
   }
 
-  useEffect(() => userName.current.focus(), [])
-
   return (
     <div>
       <h1>Login</h1>
@@ -18,6 +16,7 @@ const LoginForm = () => {
           <label htmlFor="userName">UserName</label>
           <input
             id="userName"
+            autoFocus
             ref={userName}
             type="text"
             className="form-control"
