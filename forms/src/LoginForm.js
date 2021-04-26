@@ -1,11 +1,21 @@
-import React, { createRef, useEffect } from "react"
+import React, { useState } from "react"
 import "bootstrap/dist/css/bootstrap.css"
 
 const LoginForm = () => {
-  const userName = createRef()
+  const [account, setAccount] = useState({
+    userName: "",
+    password: "",
+  })
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    const value = userName.current.value
+    console.log(account)
+  }
+
+  const handleChange = ({ currentTarget: input }) => {
+    const newAccount = { ...account }
+    newAccount[input.name] = input.value
+    setAccount(newAccount)
   }
 
   return (
@@ -16,15 +26,24 @@ const LoginForm = () => {
           <label htmlFor="userName">UserName</label>
           <input
             id="userName"
+            name="userName"
             autoFocus
-            ref={userName}
             type="text"
             className="form-control"
+            value={account.userName}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" className="form-control" />
+          <input
+            id="password"
+            name="password"
+            onChange={handleChange}
+            type="password"
+            className="form-control"
+            value={account.password}
+          />
         </div>
         <button className="btn btn-primary">Login</button>
       </form>
